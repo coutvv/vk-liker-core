@@ -3,7 +3,9 @@ package ru.coutvv.vkliker.core.vkapi.posts.entity;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Vk Post
@@ -30,8 +32,19 @@ public class Post implements Serializable{
     private Long ownerId;
     @SerializedName("attachments")
     private Attachment[] attachments;
+    @SerializedName("copy_history")
+    private Post[] repost;
 
     private LikesInfo likes;
+
+    public Post[] getRepost() {
+        return repost;
+    }
+
+    public void setRepost(Post[] repost) {
+        this.repost = repost;
+    }
+
 
     public Attachment[] getAttachments() {
         return attachments;
@@ -122,8 +135,26 @@ public class Post implements Serializable{
         this.ownerId = ownerId;
     }
 
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
     public String toString() {
-        return date + " : " + text + " \n";
+        StringBuilder result = new StringBuilder();
+        result.append("============\t============\n|")
+                .append(sdf.format(new Date(date*1000)))
+                .append("|\t type: ")
+                .append(postType )
+                .append("\n============\t============\n")
+                .append(text)
+                .append("\n");
+        if(repost != null && repost.length > 0) {
+            result.append(Arrays.toString(repost)).append(" \n");
+        }
+        if(attachments != null && attachments.length > 0) {
+            final String template = "attachement count: %s \n";
+            result.append(String.format(template, attachments.length));
+        }
+
+        return result.toString();
     }
 
 }
