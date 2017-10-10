@@ -14,7 +14,7 @@ import java.util.List;
 public interface Wall {
 
     /**
-     * Скрипт получения постов со стены
+     * script template for getting posts from user wall
      */
     String GET_SCRIPT_TEMPLATE = "return API.wall.get({\"owner_id\"  : %1$s, \"count\" : %2$d, \"filter\" : \"owner\", \"offset\" : %3$d});";
 
@@ -27,11 +27,9 @@ public interface Wall {
     /**
      * Get all cache posts
      *
-     * @return
-     * @throws ClientException
-     * @throws ApiException
+     * @return list of posts on the user wall
      */
-    List<Post> getAll() throws ClientException, ApiException;
+    List<Post> getAll();
 
     /**
      * Get all posts since target date

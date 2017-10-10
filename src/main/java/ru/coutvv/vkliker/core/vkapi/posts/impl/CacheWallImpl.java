@@ -45,7 +45,7 @@ public class CacheWallImpl implements Wall {
 
 
 
-    public CacheWallImpl(String userId, VkRequest vk) throws ClientException, ApiException, IOException, ClassNotFoundException {
+    public CacheWallImpl(String userId, VkRequest vk) throws ClientException, ApiException, IOException {
         this.userId = userId;
         this.vk = vk;
 
@@ -99,7 +99,7 @@ public class CacheWallImpl implements Wall {
     }
 
     @Override
-    public List<Post> getAll() throws ClientException, ApiException {
+    public List<Post> getAll() {
         return new ArrayList<>(wall.values());
     }
 
