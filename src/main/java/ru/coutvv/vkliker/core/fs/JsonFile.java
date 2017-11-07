@@ -12,21 +12,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
+ * Class implemented file with alone JSON Object
  * @author coutvv
  */
 public class JsonFile {
 
-    private final String filename;
-
     private final File file;
 
     public JsonFile(String filename) throws IOException {
-        this.filename = filename;
         file = new File(filename);
-        Files.createDirectories(Paths.get(file.getParent()));
     }
 
     public void write(JsonElement json) throws IOException {
+        if(!file.exists())
+            Files.createDirectories(Paths.get(file.getParent()));
         FileWriter writer = new FileWriter(file);
         try(writer) {
             writer.write(json.toString());
@@ -35,9 +34,8 @@ public class JsonFile {
     }
 
     /**
-     *
      * @return null if file doesn't exists or empty
-     * @throws IOException
+     * @throws IOException if can't get access to fs or other io problem
      */
     public JsonElement read() throws IOException {
         JsonElement result = null;
