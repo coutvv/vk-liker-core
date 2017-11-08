@@ -39,7 +39,7 @@ public class CacheWallImpl extends AbstractWall {
         cache = new JsonFile(cacheFilename);
 
         if(cache.isEmpty()) {
-            getWholeWall();
+            fillWholeWall();
             writeCacheFile();
         } else {
             JsonElement content = cache.read();
