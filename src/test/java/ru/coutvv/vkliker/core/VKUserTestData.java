@@ -33,7 +33,7 @@ public class VKUserTestData {
         try(in) {
             props.load(in);
         } catch (IOException e) {
-            throw new RuntimeException("not found app.properties");
+            throw new RuntimeException("can't load app.properties", e);
         }
 
         token = props.getProperty("token");
