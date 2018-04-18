@@ -27,6 +27,9 @@ public class LikeInfo {
         this.canPublish = canPublish;
     }
 
+    public boolean liked() {
+        return canLike == 0;
+    }
 
     public static class NotLoadedLikeInfo extends LikeInfo {
     }

@@ -19,7 +19,12 @@ public class GsonJson implements Json {
     }
 
     public GsonJson(String json, JsonParser parser) {
-        this.jsonObject = parser.parse(json).getAsJsonObject();
+        this(parser.parse(json).getAsJsonObject());
+
+    }
+
+    public GsonJson(JsonObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 
     @Override

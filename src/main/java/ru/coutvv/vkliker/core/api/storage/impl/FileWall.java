@@ -3,27 +3,27 @@ package ru.coutvv.vkliker.core.api.storage.impl;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.entity.post.impl.NewsPost;
 import ru.coutvv.vkliker.core.api.storage.PostSource;
-import ru.coutvv.vkliker.core.api.support.ScriptExecutor;
+import ru.coutvv.vkliker.core.api.support.raw.GsonJson;
 import ru.coutvv.vkliker.core.api.support.raw.Json;
+import ru.coutvv.vkliker.core.fs.JsonFile;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @author coutvv    16.04.2018
+ * get post from local file
+ * @author coutvv    17.04.2018
  */
-public class VkFeed implements PostSource {
+public class FileWall implements PostSource {
 
-    private final ScriptExecutor executor;
-    private final Map<Integer, String> nextKeys = new HashMap<>();
+    private final JsonFile source;
 
-    public VkFeed(ScriptExecutor executor) {
-        this.executor = executor;
+    public FileWall(JsonFile source) {
+        this.source = source;
     }
 
-    private static final String script = "return API.newsfeed.get({\"filters\"  : \"post\", \"count\" : 100, });";
+    private final List<Json> all = new ArrayList<>();
 
     @Override
     public List<Post> posts(int count, int offset) throws Exception {
@@ -32,7 +32,10 @@ public class VkFeed implements PostSource {
 
     @Override
     public List<Json> rawPosts(int count, int offset) throws Exception {
-        Json response = executor.raw(script); //TODO: use count and offset mechanism here
-        return response.arrField("items");
+        if(all.size() == 0)
+            source.content().getAsJsonArray().forEach(
+                    jsonElement -> all.add(new GsonJson(jsonElement.getAsJsonObject()))
+            );
+        return all.subList(offset, count);
     }
 }

@@ -4,6 +4,7 @@ import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.entity.post.impl.WallPost;
 import ru.coutvv.vkliker.core.api.storage.PostSource;
 import ru.coutvv.vkliker.core.api.support.ScriptExecutor;
+import ru.coutvv.vkliker.core.api.support.raw.Json;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +27,13 @@ public class VkWall implements PostSource {
 
     @Override
     public List<Post> posts(int count, int offset) throws Exception {
+        return rawPosts(count, offset).stream().map(WallPost::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Json> rawPosts(int count, int offset) throws Exception {
         return executor.raw(
                 String.format(SCRIPT_TEMPLATE, ownerId, count, offset)
-        ).arrField("items").stream().map(WallPost::new).collect(Collectors.toList());
+        ).arrField("items");
     }
 }

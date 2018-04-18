@@ -47,6 +47,11 @@ public abstract class Post implements Likable {
                 "\n, likeInfo=" + likeInfo +
                 '}';
     }
+
+    @Override
+    public boolean liked() {
+        return likeInfo.liked();
+    }
 }
 
 

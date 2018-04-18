@@ -31,7 +31,7 @@ public class TestVkWall {
         final List<Post> wholeWall = new ArrayList<>();
 
         List<Post> posts;
-        do {
+        do { //TODO: move this code to object & rewrite this test
             posts = userWall.posts(count, offset);
             wholeWall.addAll(posts);
             offset += count;
@@ -39,4 +39,5 @@ public class TestVkWall {
         } while(posts.size() != 0);
         System.out.println("nice!");
     }
+
 }
