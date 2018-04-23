@@ -5,7 +5,8 @@ import org.testng.annotations.Test;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.storage.impl.VkWall;
 import ru.coutvv.vkliker.core.api.support.Delay;
-import ru.coutvv.vkliker.core.support.VKUserTestData;
+import ru.coutvv.vkliker.core.api.support.ScriptExecutor;
+import ru.coutvv.vkliker.core.support.PropertiesForTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +16,22 @@ import java.util.List;
  */
 public class TestVkWall {
 
-    private VKUserTestData testData;
     private final Delay delay = new Delay(1000);
+
+    int userId;
+    ScriptExecutor scriptExecutor;
 
     @BeforeClass
     public void setup() throws Exception {
-        testData = new VKUserTestData();
+        PropertiesForTest props = new PropertiesForTest();
+
+        userId = props.intValue("userId");
+        scriptExecutor = new ScriptExecutor(userId, props.value("token"));
     }
 
     @Test
     public void gettingWholeWall() throws Exception {
-        PostSource userWall = new VkWall(testData.vkScriptExecutor(), testData.userId());
+        PostSource userWall = new VkWall(scriptExecutor, userId);
         int count = 100, offset = 0;
 
         final List<Post> wholeWall = new ArrayList<>();

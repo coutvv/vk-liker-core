@@ -1,11 +1,13 @@
 package ru.coutvv.vkliker.core.app;
 
-import org.testng.annotations.BeforeClass;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.io.ResourceOf;
+import org.cactoos.scalar.PropertiesOf;
+import org.cactoos.text.TextOf;
 import org.testng.annotations.Test;
+import ru.coutvv.vkliker.core.App;
 import ru.coutvv.vkliker.core.api.support.Delay;
-import ru.coutvv.vkliker.core.support.VKUserTestData;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /**
@@ -13,26 +15,25 @@ import java.util.concurrent.Executors;
  */
 public class TestLimitlessLike {
 
-    VKUserTestData userData;
-
-    @BeforeClass
-    public void setup() throws Exception {
-        userData = new VKUserTestData();
-    }
-
     @Test
     public void testApp() throws Exception {
-        App app = new LimitlessLike(userData.vkScriptExecutor());
-        Switch control = app.control();
-        Executor core = Executors.newSingleThreadExecutor();
-        core.execute(() -> {
+        App app = new LimitlessLike(new PropertiesOf(
+                new TextOf(
+                        new InputStreamOf(
+                                new ResourceOf("app.properties")
+                        )
+                )
+        ).value());
+
+        Executors.newSingleThreadExecutor().execute(() -> {
             try {
                 app.run();
             } catch (Exception e) {
                 // once recovery place
             }
         });
+
         new Delay(10_000).apply(); // wait a little and turn app off
-        control.off();
+        app.control().off();
     }
 }

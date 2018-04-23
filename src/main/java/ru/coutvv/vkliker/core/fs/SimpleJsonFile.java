@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 
 /**
  * Class implemented file with alone JSON Object
+ *
+ * TODO: rewrite with using Cactoos
  * @author coutvv
  */
 public class SimpleJsonFile implements JsonFile {

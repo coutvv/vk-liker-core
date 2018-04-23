@@ -1,11 +1,14 @@
 package ru.coutvv.vkliker.core;
 
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.scalar.PropertiesOf;
+import org.cactoos.text.TextOf;
 import ru.coutvv.vkliker.core.api.support.Delay;
-import ru.coutvv.vkliker.core.app.App;
 import ru.coutvv.vkliker.core.app.LimitlessLike;
-import ru.coutvv.vkliker.core.app.Switch;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,20 +18,19 @@ import java.util.concurrent.Executors;
  */
 public class EntryPoint {
     public static void main(String[] args) throws Exception {
-        final int userId;
-        final String token;
-        try(InputStream in = new FileInputStream(new File("app.properties"))) {
-            Properties props = new Properties();
-            props.load(in);
-            userId = Integer.parseInt(props.getProperty("userId"));
-            token = props.getProperty("token");
-        } catch (Exception e) {
-            throw new Exception("can't load app.properties", e);
-        }
 
-        App app = new LimitlessLike(userId, token);
+        final Properties props = new PropertiesOf(
+                new TextOf(
+                        new InputStreamOf(
+                                new File("app.properties")
+                        )
+                )
+        ).value();
+
+        App app = new LimitlessLike(props);
         Switch control = app.control();
         ExecutorService core = Executors.newSingleThreadExecutor();
+
         core.execute(() -> {
             try {
                 app.run();
@@ -36,6 +38,7 @@ public class EntryPoint {
                 // once recovery place
             }
         });
+
         new Delay(10_000).apply(); // wait a little and turn app off
         System.out.println("Press enter to quit: ");
 
@@ -44,5 +47,7 @@ public class EntryPoint {
 
         control.off();
         core.shutdown();
+
+        System.exit(0);
     }
 }

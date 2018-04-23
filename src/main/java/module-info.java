@@ -8,4 +8,5 @@ module ru.coutvv.vkliker.core {
     requires sdk;
     requires commons.logging;
     requires java.sql; // gson dependency
+    requires cactoos;
 }

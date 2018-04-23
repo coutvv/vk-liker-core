@@ -1,4 +1,4 @@
-package ru.coutvv.vkliker.core.app;
+package ru.coutvv.vkliker.core;
 
 public interface App {
     void run() throws Exception;

@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
+import org.cactoos.scalar.NumberOf;
+import ru.coutvv.vkliker.core.App;
+import ru.coutvv.vkliker.core.Switch;
 import ru.coutvv.vkliker.core.api.action.impl.RemoteLike;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.storage.PostSource;
@@ -11,6 +14,7 @@ import ru.coutvv.vkliker.core.api.storage.impl.VkFeed;
 import ru.coutvv.vkliker.core.api.support.Delay;
 import ru.coutvv.vkliker.core.api.support.ScriptExecutor;
 
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -22,6 +26,15 @@ public class LimitlessLike implements App {
 
     private final ScriptExecutor executor;
     private final AtomicBoolean running;
+
+    public LimitlessLike(Properties properties) throws Exception {
+            this(new UserActor(
+                    new NumberOf(properties.getProperty("userId")).intValue(),
+                    properties.getProperty("token")
+                ),
+                new VkApiClient(HttpTransportClient.getInstance(), new Gson())
+            );
+    }
 
     public LimitlessLike(int userId, String token) {
         this(
