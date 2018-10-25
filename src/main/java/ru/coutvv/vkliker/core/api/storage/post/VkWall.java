@@ -1,4 +1,4 @@
-package ru.coutvv.vkliker.core.api.storage.impl;
+package ru.coutvv.vkliker.core.api.storage.post;
 
 import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.entity.post.impl.WallPost;

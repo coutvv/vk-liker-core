@@ -3,7 +3,7 @@ package ru.coutvv.vkliker.core.api.storage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
-import ru.coutvv.vkliker.core.api.storage.impl.VkWall;
+import ru.coutvv.vkliker.core.api.storage.post.VkWall;
 import ru.coutvv.vkliker.core.api.support.Delay;
 import ru.coutvv.vkliker.core.api.support.ScriptExecutor;
 import ru.coutvv.vkliker.core.support.PropertiesForTest;

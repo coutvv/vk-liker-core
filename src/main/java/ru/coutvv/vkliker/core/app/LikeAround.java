@@ -4,39 +4,47 @@ import ru.coutvv.vkliker.core.App;
 import ru.coutvv.vkliker.core.Switch;
 import ru.coutvv.vkliker.core.api.action.impl.RemoteLike;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
+import ru.coutvv.vkliker.core.api.entity.user.User;
 import ru.coutvv.vkliker.core.api.storage.PostSource;
-import ru.coutvv.vkliker.core.api.storage.post.VkFeed;
+import ru.coutvv.vkliker.core.api.storage.UserStorage;
+import ru.coutvv.vkliker.core.api.storage.post.VkWall;
+import ru.coutvv.vkliker.core.api.storage.user.FriendList;
 import ru.coutvv.vkliker.core.api.support.Delay;
 
+import java.util.List;
 import java.util.Properties;
 
 /**
- * Program that's loving to like all post in user feed
+ * like wall of friends of friends
  *
- * @author coutvv    18.04.2018
+ * @author coutvv    02.07.2018
  */
-public class LimitlessLike extends App {
+public class LikeAround extends App {
 
-    public LimitlessLike(Properties properties) throws Exception {
+
+    public LikeAround(Properties properties) throws Exception {
         super(properties);
     }
 
     @Override
     public void run() throws Exception {
-        Delay fiveMin = new Delay(300_000);
+
+
         Delay betweenLike = new Delay(7_000);
-        PostSource feed = new VkFeed(executor);
-        while(running.get()) {
-            for(Post post: feed.posts(20, 0)) {
-                if(!post.liked() && running.get()) {
+
+        UserStorage us = new FriendList(executor, 119555169);
+        List<User> users = us.users();
+
+        for(User user: users) {
+            for(User fOfUser : user.vkFriends(executor)) {
+                PostSource src = new VkWall(executor, (int) fOfUser.id());
+                for(Post post : src.posts(100, 0) ) {
                     new RemoteLike(executor).add(post.likable().objectIdentity());
                     System.out.println("Post: " + post.toString() + " has liked!");
                     betweenLike.apply();
                 }
             }
-            fiveMin.apply();
         }
-        System.out.println("App was stopped");
     }
 
     @Override

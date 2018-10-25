@@ -3,7 +3,7 @@ package ru.coutvv.vkliker.core.api.storage;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.testng.Assert;
-import ru.coutvv.vkliker.core.api.storage.impl.VkFeed;
+import ru.coutvv.vkliker.core.api.storage.post.VkFeed;
 import ru.coutvv.vkliker.core.api.support.ScriptExecutor;
 import ru.coutvv.vkliker.core.support.PropertiesForTest;
 

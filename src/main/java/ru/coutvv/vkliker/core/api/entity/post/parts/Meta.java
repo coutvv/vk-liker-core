@@ -36,4 +36,11 @@ public class Meta {
     public LikableObject likableMetadata(String type, String accessKey) {
         return new LikableObject(type, ownerId, id, accessKey);
     }
+
+    @Override
+    public String toString() {
+        return "Meta{" +
+                "ownerId=" + ownerId +
+                '}';
+    }
 }

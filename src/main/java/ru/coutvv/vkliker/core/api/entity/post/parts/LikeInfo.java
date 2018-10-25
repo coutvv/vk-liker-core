@@ -31,6 +31,16 @@ public class LikeInfo {
         return canLike == 0;
     }
 
+    @Override
+    public String toString() {
+        return "LikeInfo{" +
+                "count=" + count +
+                ", userLikes=" + userLikes +
+                ", canLike=" + canLike +
+                ", canPublish=" + canPublish +
+                '}';
+    }
+
     public static class NotLoadedLikeInfo extends LikeInfo {
     }
 }
