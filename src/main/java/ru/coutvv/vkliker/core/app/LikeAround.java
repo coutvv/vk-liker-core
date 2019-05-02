@@ -1,7 +1,8 @@
 package ru.coutvv.vkliker.core.app;
 
+import org.cactoos.scalar.NumberOf;
 import ru.coutvv.vkliker.core.App;
-import ru.coutvv.vkliker.core.Switch;
+import ru.coutvv.vkliker.core.Switcher;
 import ru.coutvv.vkliker.core.api.action.impl.RemoteLike;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.entity.user.User;
@@ -21,18 +22,18 @@ import java.util.Properties;
  */
 public class LikeAround extends App {
 
+    private final int friendId;
 
-    public LikeAround(Properties properties) throws Exception {
+    public LikeAround(Properties properties) {
         super(properties);
+        friendId = new NumberOf(properties.getProperty("friendId")).intValue();
     }
 
     @Override
     public void run() throws Exception {
-
-
         Delay betweenLike = new Delay(7_000);
 
-        UserStorage us = new FriendList(executor, 119555169);
+        UserStorage us = new FriendList(executor, friendId);
         List<User> users = us.users();
 
         for(User user: users) {
@@ -48,7 +49,7 @@ public class LikeAround extends App {
     }
 
     @Override
-    public Switch control() {
+    public Switcher control() {
         return () -> running.set(false);
     }
 

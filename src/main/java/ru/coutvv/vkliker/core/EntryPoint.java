@@ -28,7 +28,7 @@ public class EntryPoint {
         ).value();
 
         App app = new LimitlessLike(props);
-        Switch control = app.control();
+        Switcher control = app.control();
         ExecutorService core = Executors.newSingleThreadExecutor();
 
         core.execute(() -> {

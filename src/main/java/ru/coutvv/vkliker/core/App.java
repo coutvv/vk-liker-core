@@ -15,7 +15,7 @@ public abstract class App {
     protected final ScriptExecutor executor;
     protected final AtomicBoolean running;
 
-    public App(Properties properties) throws Exception {
+    public App(Properties properties) {
         this(new UserActor(
                         new NumberOf(properties.getProperty("userId")).intValue(),
                         properties.getProperty("token")
@@ -46,5 +46,5 @@ public abstract class App {
     }
 
     public abstract void run() throws Exception;
-    public abstract Switch control();
+    public abstract Switcher control();
 }
