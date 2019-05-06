@@ -46,5 +46,8 @@ public abstract class App {
     }
 
     public abstract void run() throws Exception;
-    public abstract Switcher control();
+
+    public Switcher control() {
+        return () -> running.set(false);
+    }
 }

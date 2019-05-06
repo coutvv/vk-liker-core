@@ -47,10 +47,4 @@ public class LikeAround extends App {
             }
         }
     }
-
-    @Override
-    public Switcher control() {
-        return () -> running.set(false);
-    }
-
 }

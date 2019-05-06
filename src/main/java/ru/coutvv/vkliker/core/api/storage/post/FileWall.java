@@ -38,4 +38,9 @@ public class FileWall implements PostSource {
             );
         return all.subList(offset, count);
     }
+
+    @Override
+    public int quantityPosts() {
+        throw new IllegalArgumentException("not implemented");
+    }
 }

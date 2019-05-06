@@ -8,12 +8,18 @@ try tests
 
 ### Prerequisites
 
-jdk-9
+jdk-11
 
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+For getting token for app you need to make next requests:
+
+- getting code:
+https://oauth.vk.com/authorize?client_id=&display=page&scope=offline,wall,messages,notes,status,video,audio,photos,friends,notify,groups,docs,notification&response_type=code&v=5.95
+
+- getting access token:
+https://oauth.vk.com/access_token?client_id=&client_secret=&code=
 
 ## Built With
 

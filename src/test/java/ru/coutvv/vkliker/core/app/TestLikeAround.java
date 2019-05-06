@@ -1,9 +1,5 @@
 package ru.coutvv.vkliker.core.app;
 
-import org.cactoos.io.InputStreamOf;
-import org.cactoos.io.ResourceOf;
-import org.cactoos.scalar.PropertiesOf;
-import org.cactoos.text.TextOf;
 import org.testng.annotations.Test;
 import ru.coutvv.vkliker.core.App;
 import ru.coutvv.vkliker.core.api.support.Delay;
@@ -13,17 +9,10 @@ import java.util.concurrent.Executors;
 /**
  * @author coutvv    02.07.2018
  */
-public class TestLikeAround {
-
+public class TestLikeAround extends TestApp {
     @Test
     public void testApp() throws Exception {
-        App app = new LikeAround(new PropertiesOf(
-                new TextOf(
-                        new InputStreamOf(
-                                new ResourceOf("app.properties")
-                        )
-                )
-        ).value());
+        App app = new LikeAround(testProps());
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {

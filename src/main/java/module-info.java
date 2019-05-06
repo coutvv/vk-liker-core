@@ -9,4 +9,5 @@ module ru.coutvv.vkliker.core {
     requires commons.logging;
     requires java.sql; // gson dependency
     requires cactoos;
+    requires commons.io;
 }

@@ -14,5 +14,6 @@ public interface PostSource {
 
     List<Json> rawPosts(int count, int offset) throws Exception;
 
+    int quantityPosts() throws Exception;
 }
 

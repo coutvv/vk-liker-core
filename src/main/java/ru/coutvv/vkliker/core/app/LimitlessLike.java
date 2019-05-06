@@ -1,7 +1,6 @@
 package ru.coutvv.vkliker.core.app;
 
 import ru.coutvv.vkliker.core.App;
-import ru.coutvv.vkliker.core.Switcher;
 import ru.coutvv.vkliker.core.api.action.impl.RemoteLike;
 import ru.coutvv.vkliker.core.api.entity.post.Post;
 import ru.coutvv.vkliker.core.api.storage.PostSource;
@@ -38,10 +37,4 @@ public class LimitlessLike extends App {
         }
         System.out.println("App was stopped");
     }
-
-    @Override
-    public Switcher control() {
-        return () -> running.set(false);
-    }
-
 }

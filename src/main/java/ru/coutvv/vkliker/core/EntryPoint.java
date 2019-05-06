@@ -4,7 +4,7 @@ import org.cactoos.io.InputStreamOf;
 import org.cactoos.scalar.PropertiesOf;
 import org.cactoos.text.TextOf;
 import ru.coutvv.vkliker.core.api.support.Delay;
-import ru.coutvv.vkliker.core.app.LimitlessLike;
+import ru.coutvv.vkliker.core.app.backup.WallBackup;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,7 +27,7 @@ public class EntryPoint {
                 )
         ).value();
 
-        App app = new LimitlessLike(props);
+        App app = new WallBackup(props);
         Switcher control = app.control();
         ExecutorService core = Executors.newSingleThreadExecutor();
 

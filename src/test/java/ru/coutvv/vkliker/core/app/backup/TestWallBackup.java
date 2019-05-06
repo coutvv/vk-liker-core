@@ -1,19 +1,17 @@
-package ru.coutvv.vkliker.core.app;
+package ru.coutvv.vkliker.core.app.backup;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 import ru.coutvv.vkliker.core.App;
 import ru.coutvv.vkliker.core.api.support.Delay;
+import ru.coutvv.vkliker.core.app.TestApp;
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 
-/**
- * @author coutvv    18.04.2018
- */
-public class TestLimitlessLike extends TestApp {
-
+public class TestWallBackup extends TestApp {
     @Test
-    public void testApp() throws Exception {
-        App app = new LimitlessLike(testProps());
+    public void simpleTest() throws IOException, InterruptedException {
+        App app = new WallBackup(testProps());
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
@@ -23,7 +21,8 @@ public class TestLimitlessLike extends TestApp {
             }
         });
 
-        new Delay(10_000).apply(); // wait a little and turn app off
+        new Delay(100_000).apply(); // wait a little and turn app off
         app.control().off();
     }
+
 }

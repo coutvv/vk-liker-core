@@ -35,4 +35,9 @@ public class VkFeed implements PostSource {
         Json response = executor.raw(script); //TODO: use count and offset mechanism here
         return response.arrField("items");
     }
+
+    @Override
+    public int quantityPosts() {
+        throw new IllegalArgumentException("not implemented");
+    }
 }

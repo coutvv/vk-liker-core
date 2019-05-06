@@ -9,3 +9,4 @@
 /gradle
 /out
 .DS_Store
+/backup

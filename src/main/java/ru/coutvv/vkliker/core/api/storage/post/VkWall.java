@@ -36,4 +36,11 @@ public class VkWall implements PostSource {
                 String.format(SCRIPT_TEMPLATE, ownerId, count, offset)
         ).arrField("items");
     }
+
+    @Override
+    public int quantityPosts() throws Exception {
+        return executor.raw(
+                String.format(SCRIPT_TEMPLATE, ownerId, 1, 0)
+        ).longField("count").intValue();
+    }
 }
