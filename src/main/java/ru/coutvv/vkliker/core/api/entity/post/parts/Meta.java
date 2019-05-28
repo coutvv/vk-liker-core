@@ -8,39 +8,39 @@ import ru.coutvv.vkliker.core.api.entity.LikableObject;
  */
 public class Meta {
 
-    private long id;
-    private long date;
-    private long ownerId;
+	private long id;
+	private long date;
+	private long ownerId;
 
 
-    public Meta(Json json) {
-        this(json.longField("id"),
-             json.longField("date"),
-             json.longField("owner_id"));
-    }
+	public Meta(Json json) {
+		this(json.longField("id"),
+				json.longField("date"),
+				json.longField("owner_id"));
+	}
 
-    public Meta(Json json, String nameId, String nameOwner) {
+	public Meta(Json json, String nameId, String nameOwner) {
 
-        this(json.longField(nameId),
-                json.longField("date"),
-                json.longField(nameOwner));
+		this(json.longField(nameId),
+				json.longField("date"),
+				json.longField(nameOwner));
 
-    }
+	}
 
-    public Meta(long id, long date, long ownerId) {
-        this.id = id;
-        this.date = date;
-        this.ownerId = ownerId;
-    }
+	public Meta(long id, long date, long ownerId) {
+		this.id = id;
+		this.date = date;
+		this.ownerId = ownerId;
+	}
 
-    public LikableObject likableMetadata(String type, String accessKey) {
-        return new LikableObject(type, ownerId, id, accessKey);
-    }
+	public LikableObject likableMetadata(String type, String accessKey) {
+		return new LikableObject(type, ownerId, id, accessKey);
+	}
 
-    @Override
-    public String toString() {
-        return "Meta{" +
-                "ownerId=" + ownerId +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Meta{" +
+				"ownerId=" + ownerId +
+				'}';
+	}
 }

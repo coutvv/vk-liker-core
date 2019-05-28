@@ -8,6 +8,7 @@ import java.io.IOException;
  *
  */
 public interface JsonFile {
-    void write(JsonElement json) throws IOException;
-    JsonElement content() throws IOException;
+	void write(JsonElement json) throws IOException;
+
+	JsonElement content() throws IOException;
 }

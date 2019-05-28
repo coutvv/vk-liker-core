@@ -17,37 +17,37 @@ import java.util.concurrent.Executors;
  * @author coutvv
  */
 public class EntryPoint {
-    public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 
-        final Properties props = new PropertiesOf(
-                new TextOf(
-                        new InputStreamOf(
-                                new File("app.properties")
-                        )
-                )
-        ).value();
+		final Properties props = new PropertiesOf(
+				new TextOf(
+						new InputStreamOf(
+								new File("app.properties")
+						)
+				)
+		).value();
 
-        App app = new WallBackup(props);
-        Switcher control = app.control();
-        ExecutorService core = Executors.newSingleThreadExecutor();
+		App app = new WallBackup(props);
+		Switcher control = app.control();
+		ExecutorService core = Executors.newSingleThreadExecutor();
 
-        core.execute(() -> {
-            try {
-                app.run();
-            } catch (Exception e) {
-                // once recovery place
-            }
-        });
+		core.execute(() -> {
+			try {
+				app.run();
+			} catch (Exception e) {
+				// once recovery place
+			}
+		});
 
-        new Delay(10_000).apply(); // wait a little and turn app off
-        System.out.println("Press enter to quit: ");
+		new Delay(10_000).apply(); // wait a little and turn app off
+		System.out.println("Press enter to quit: ");
 
-        String fromConsole = new BufferedReader(new InputStreamReader(System.in)).readLine();
-        System.out.println("Entered: " + fromConsole);
+		String fromConsole = new BufferedReader(new InputStreamReader(System.in)).readLine();
+		System.out.println("Entered: " + fromConsole);
 
-        control.off();
-        core.shutdown();
+		control.off();
+		core.shutdown();
 
-        System.exit(0);
-    }
+		System.exit(0);
+	}
 }

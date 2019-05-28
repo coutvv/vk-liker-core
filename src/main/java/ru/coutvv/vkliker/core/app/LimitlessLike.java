@@ -16,25 +16,25 @@ import java.util.Properties;
  */
 public class LimitlessLike extends App {
 
-    public LimitlessLike(Properties properties) {
-        super(properties);
-    }
+	public LimitlessLike(Properties properties) {
+		super(properties);
+	}
 
-    @Override
-    public void run() throws Exception {
-        Delay fiveMin = new Delay(300_000);
-        Delay betweenLike = new Delay(7_000);
-        PostSource feed = new VkFeed(executor);
-        while(running.get()) {
-            for(Post post: feed.posts(20, 0)) {
-                if(!post.liked() && running.get()) {
-                    new RemoteLike(executor).add(post.likable().objectIdentity());
-                    System.out.println("Post: " + post.toString() + " has liked!");
-                    betweenLike.apply();
-                }
-            }
-            fiveMin.apply();
-        }
-        System.out.println("App was stopped");
-    }
+	@Override
+	public void run() throws Exception {
+		Delay fiveMin = new Delay(300_000);
+		Delay betweenLike = new Delay(7_000);
+		PostSource feed = new VkFeed(executor);
+		while (running.get()) {
+			for (Post post : feed.posts(20, 0)) {
+				if (!post.liked() && running.get()) {
+					new RemoteLike(executor).add(post.likable().objectIdentity());
+					System.out.println("Post: " + post.toString() + " has liked!");
+					betweenLike.apply();
+				}
+			}
+			fiveMin.apply();
+		}
+		System.out.println("App was stopped");
+	}
 }

@@ -12,28 +12,28 @@ import ru.coutvv.vkliker.core.api.support.raw.Json;
  */
 public class ScriptExecutor {
 
-    private final VkApiClient vk;
-    private final UserActor actor;
+	private final VkApiClient vk;
+	private final UserActor actor;
 
-    public ScriptExecutor(int userId, String token) {
-        this(
-                new VkApiClient(HttpTransportClient.getInstance(), new Gson()),
-                new UserActor(userId, token)
-        );
-    }
+	public ScriptExecutor(int userId, String token) {
+		this(
+				new VkApiClient(HttpTransportClient.getInstance(), new Gson()),
+				new UserActor(userId, token)
+		);
+	}
 
-    public ScriptExecutor(VkApiClient vk, UserActor actor) {
-        this.vk = vk;
-        this.actor = actor;
-    }
+	public ScriptExecutor(VkApiClient vk, UserActor actor) {
+		this.vk = vk;
+		this.actor = actor;
+	}
 
-    public Json raw(String script) throws Exception {
-        try {
-            return new GsonJson(
-                    vk.execute().code(actor, script).execute().toString()
-            );
-        } catch(Exception ex) {
-            throw new Exception("Can't execute script to remote vk API: " + script, ex);
-        }
-    }
+	public Json raw(String script) throws Exception {
+		try {
+			return new GsonJson(
+					vk.execute().code(actor, script).execute().toString()
+			);
+		} catch (Exception ex) {
+			throw new Exception("Can't execute script to remote vk API: " + script, ex);
+		}
+	}
 }

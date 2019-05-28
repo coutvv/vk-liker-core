@@ -12,42 +12,42 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class App {
 
-    protected final ScriptExecutor executor;
-    protected final AtomicBoolean running;
+	protected final ScriptExecutor executor;
+	protected final AtomicBoolean running;
 
-    public App(Properties properties) {
-        this(new UserActor(
-                        new NumberOf(properties.getProperty("userId")).intValue(),
-                        properties.getProperty("token")
-                ),
-                new VkApiClient(HttpTransportClient.getInstance(), new Gson())
-        );
-    }
+	public App(Properties properties) {
+		this(new UserActor(
+						new NumberOf(properties.getProperty("userId")).intValue(),
+						properties.getProperty("token")
+				),
+				new VkApiClient(HttpTransportClient.getInstance(), new Gson())
+		);
+	}
 
-    public App(int userId, String token) {
-        this(
-                new UserActor(userId, token),
-                new VkApiClient(HttpTransportClient.getInstance(), new Gson())
-        );
+	public App(int userId, String token) {
+		this(
+				new UserActor(userId, token),
+				new VkApiClient(HttpTransportClient.getInstance(), new Gson())
+		);
 
-    }
+	}
 
-    public App(UserActor actor, VkApiClient vk) {
-        this(
-                new ScriptExecutor(vk, actor)
-        );
+	public App(UserActor actor, VkApiClient vk) {
+		this(
+				new ScriptExecutor(vk, actor)
+		);
 
-    }
+	}
 
-    public App(ScriptExecutor executor) {
+	public App(ScriptExecutor executor) {
 
-        this.executor = executor;
-        this.running = new AtomicBoolean(true);
-    }
+		this.executor = executor;
+		this.running = new AtomicBoolean(true);
+	}
 
-    public abstract void run() throws Exception;
+	public abstract void run() throws Exception;
 
-    public Switcher control() {
-        return () -> running.set(false);
-    }
+	public Switcher control() {
+		return () -> running.set(false);
+	}
 }
