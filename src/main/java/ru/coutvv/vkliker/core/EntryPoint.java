@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
  * @author coutvv
  */
 public class EntryPoint {
+	static int test = 1;
     public static void main(String[] args) throws Exception {
 
         final Properties props = new PropertiesOf(
