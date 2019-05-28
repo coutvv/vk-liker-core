@@ -11,26 +11,26 @@ import java.util.List;
  * @author coutvv    02.07.2018
  */
 public class User {
-    final Identity identity;
+	final Identity identity;
 
-    public User(Json json) {
-        this(new Identity(json));
-    }
+	public User(Json json) {
+		this(new Identity(json));
+	}
 
-    public User(Identity identity) {
-        this.identity = identity;
-    }
+	public User(Identity identity) {
+		this.identity = identity;
+	}
 
-    @Override
-    public String toString() {
-        return identity.toString();
-    }
+	@Override
+	public String toString() {
+		return identity.toString();
+	}
 
-    public List<User> vkFriends(ScriptExecutor executorService) throws Exception {
-        return new FriendList(executorService, (int)identity.getId()).users();
-    }
+	public List<User> vkFriends(ScriptExecutor executorService) throws Exception {
+		return new FriendList(executorService, (int) identity.getId()).users();
+	}
 
-    public long id() {
-        return identity.getId();
-    }
+	public long id() {
+		return identity.getId();
+	}
 }

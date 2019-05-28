@@ -5,5 +5,5 @@ package ru.coutvv.vkliker.core;
  */
 @FunctionalInterface
 public interface Switcher {
-    void off();
+	void off();
 }

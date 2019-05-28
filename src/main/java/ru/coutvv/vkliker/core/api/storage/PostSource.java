@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface PostSource {
 
-    List<Post> posts(int count, int offset) throws Exception;
+	List<Post> posts(int count, int offset) throws Exception;
 
-    List<Json> rawPosts(int count, int offset) throws Exception;
+	List<Json> rawPosts(int count, int offset) throws Exception;
 
-    int quantityPosts() throws Exception;
+	int quantityPosts() throws Exception;
 }
 

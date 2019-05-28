@@ -1,6 +1,7 @@
 package ru.coutvv.vkliker.core.api.entity;
 
 public interface Likable {
-    LikableObject likable();
-    boolean liked();
+	LikableObject likable();
+
+	boolean liked();
 }

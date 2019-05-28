@@ -11,10 +11,10 @@ import ru.coutvv.vkliker.core.api.support.raw.Json;
  */
 public class NewsPost extends Post {
 
-    public NewsPost(Json json) {
-        super(new Meta(json, "post_id", "source_id"),
-                new Content(json),
-                new LikeInfo(json.objField("likes")));
-    }
+	public NewsPost(Json json) {
+		super(new Meta(json, "post_id", "source_id"),
+				new Content(json),
+				new LikeInfo(json.objField("likes")));
+	}
 
 }

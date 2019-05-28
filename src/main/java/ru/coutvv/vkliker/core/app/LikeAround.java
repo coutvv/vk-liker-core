@@ -22,29 +22,29 @@ import java.util.Properties;
  */
 public class LikeAround extends App {
 
-    private final int friendId;
+	private final int friendId;
 
-    public LikeAround(Properties properties) {
-        super(properties);
-        friendId = new NumberOf(properties.getProperty("friendId")).intValue();
-    }
+	public LikeAround(Properties properties) {
+		super(properties);
+		friendId = new NumberOf(properties.getProperty("friendId")).intValue();
+	}
 
-    @Override
-    public void run() throws Exception {
-        Delay betweenLike = new Delay(7_000);
+	@Override
+	public void run() throws Exception {
+		Delay betweenLike = new Delay(7_000);
 
-        UserStorage us = new FriendList(executor, friendId);
-        List<User> users = us.users();
+		UserStorage us = new FriendList(executor, friendId);
+		List<User> users = us.users();
 
-        for(User user: users) {
-            for(User fOfUser : user.vkFriends(executor)) {
-                PostSource src = new VkWall(executor, (int) fOfUser.id());
-                for(Post post : src.posts(100, 0) ) {
-                    new RemoteLike(executor).add(post.likable().objectIdentity());
-                    System.out.println("Post: " + post.toString() + " has liked!");
-                    betweenLike.apply();
-                }
-            }
-        }
-    }
+		for (User user : users) {
+			for (User fOfUser : user.vkFriends(executor)) {
+				PostSource src = new VkWall(executor, (int) fOfUser.id());
+				for (Post post : src.posts(100, 0)) {
+					new RemoteLike(executor).add(post.likable().objectIdentity());
+					System.out.println("Post: " + post.toString() + " has liked!");
+					betweenLike.apply();
+				}
+			}
+		}
+	}
 }

@@ -5,5 +5,5 @@ package ru.coutvv.vkliker.core.api;
  */
 public class Root {
 
-    //TODO: ???
+	//TODO: ???
 }

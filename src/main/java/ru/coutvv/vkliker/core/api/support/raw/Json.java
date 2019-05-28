@@ -4,9 +4,12 @@ import java.util.List;
 
 public interface Json {
 
-    Json objField(String fieldName);
-    List<Json> arrField(String fieldName);
-    String stringField(String fieldName);
-    Long longField(String fieldName);
+	Json objField(String fieldName);
+
+	List<Json> arrField(String fieldName);
+
+	String stringField(String fieldName);
+
+	Long longField(String fieldName);
 
 }

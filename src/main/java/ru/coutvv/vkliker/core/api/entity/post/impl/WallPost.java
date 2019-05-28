@@ -7,7 +7,7 @@ import ru.coutvv.vkliker.core.api.support.raw.Json;
  * @author coutvv    16.04.2018
  */
 public class WallPost extends Post {
-    public WallPost(Json json) {
-        super(json);
-    }
+	public WallPost(Json json) {
+		super(json);
+	}
 }

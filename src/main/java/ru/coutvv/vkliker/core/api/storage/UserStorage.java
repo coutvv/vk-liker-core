@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface UserStorage {
 
-    List<User> users() throws Exception;
+	List<User> users() throws Exception;
 }
